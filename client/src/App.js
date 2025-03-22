@@ -38,7 +38,6 @@ function App() {
       }
     } catch (error) {
       console.error("Error generating flashcards:", error);
-
       alert("An error occurred while generating flashcards.");
     }
   };
@@ -110,28 +109,32 @@ function App() {
         <div className="flex-1 relative flex flex-col overflow-x-hidden">
           {/* Carousel Container */}
           <div className="relative w-full flex-1 flex items-center justify-center">
-            {flashcards.length > 0 && (
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Render the previous flashcard as a scaled, semi-transparent preview if available */}
-                {currentIndex > 0 && (
-                  <div className="absolute left-10 top-1/2 transform -translate-y-1/2 scale-90 opacity-50 pointer-events-none">
-                    <Flashcard flashcard={flashcards[currentIndex - 1]} />
-                  </div>
-                )}
-
-                {/* Render the current active flashcard */}
-                <div className="z-10">
-                  <Flashcard flashcard={flashcards[currentIndex]} />
+          {flashcards.length > 0 && (
+            <div className="flex items-center justify-center gap-10">
+              {/* Left preview card OR empty spacer */}
+              {currentIndex > 0 ? (
+                <div className="scale-90 opacity-50 pointer-events-none">
+                  <Flashcard flashcard={flashcards[currentIndex - 1]} />
                 </div>
+              ) : (
+                <div className="w-[40rem] h-[24rem] max-w-[90vw] max-h-[90vh] opacity-0" />
+              )}
 
-                {/* Render the next flashcard as a scaled, semi-transparent preview if available */}
-                {currentIndex < flashcards.length - 1 && (
-                  <div className="absolute right-10 top-1/2 transform -translate-y-1/2 scale-90 opacity-50 pointer-events-none">
-                    <Flashcard flashcard={flashcards[currentIndex + 1]} />
-                  </div>
-                )}
+              {/* Center active card */}
+              <div className="z-10">
+                <Flashcard flashcard={flashcards[currentIndex]} />
               </div>
-            )}
+
+              {/* Right preview card OR empty spacer */}
+              {currentIndex < flashcards.length - 1 ? (
+                <div className="scale-90 opacity-50 pointer-events-none">
+                  <Flashcard flashcard={flashcards[currentIndex + 1]} />
+                </div>
+              ) : (
+                <div className="w-[40rem] h-[24rem] max-w-[90vw] max-h-[90vh] opacity-0" />
+              )}
+            </div>
+          )}
 
             {/* Left navigation arrow to go to the previous flashcard */}
             {currentIndex > 0 && (

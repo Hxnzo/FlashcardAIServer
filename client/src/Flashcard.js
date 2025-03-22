@@ -12,7 +12,7 @@ function Flashcard({ flashcard }) {
     // Main container: clicking it toggles the 'flipped' state.
     <div
       onClick={() => setFlipped(!flipped)}
-      className="w-[40rem] h-[24rem] bg-white text-gray-900 rounded-xl shadow-2xl 
+      className="w-[40rem] h-[24rem] max-w-[90vw] max-h-[90vh] bg-white text-gray-900 rounded-xl shadow-2xl 
                  cursor-pointer flex items-center justify-center 
                  transform transition-transform duration-500 hover:scale-105"
     >
